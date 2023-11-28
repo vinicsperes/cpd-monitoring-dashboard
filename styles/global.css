@@ -2,3 +2,7 @@ body {
     margin: 0;
     /* Add more styles as needed */
 }
+
+.ant-card-body {
+    padding: 0 !important;
+}
