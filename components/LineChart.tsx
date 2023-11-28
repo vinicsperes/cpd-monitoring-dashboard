@@ -23,8 +23,8 @@ ChartJS.register(
   Legend
 )
 
-function ChartComponent({ chartData }) {
+function LineChart({ chartData }) {
   return <Line data={chartData} />;
 }
 
-export default ChartComponent;
+export default LineChart;

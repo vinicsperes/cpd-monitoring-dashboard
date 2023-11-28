@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ChartComponent from "../components/ChartComponent";
+import LineChart from "./LineChart";
 
 export const TemperatureData = [
   {
@@ -29,7 +29,7 @@ export const TemperatureData = [
   },
 ];
 
-function App() {
+export default function TemperatureChart() {
   const [temperatureData, setTemperatureData] = useState({
     labels: TemperatureData.map((data) => data.date),
     datasets: [
@@ -50,12 +50,10 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <div style={{ width: 1000 }}>
-        <ChartComponent chartData={temperatureData} />
+    <div className="TemperatureChart">
+      <div>
+        <LineChart chartData={temperatureData} />
       </div>
     </div>
   );
 }
-
-export default App;

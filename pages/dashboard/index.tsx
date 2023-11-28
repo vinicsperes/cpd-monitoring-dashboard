@@ -1,13 +1,18 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
 import styles from './styles.module.css';
-import ChartComponent from '../../components/ChartComponent';
 
 import { Thermometer, Drop, Wind } from "@phosphor-icons/react";
-
+import TemperatureChart from '../../components/TemperatureChart';
 
 export default function Dashboard() {
+  // Valores fictícios para temperatura, umidade e gás
+  const temperatureValue = 25;
+  const humidityValue = 60;
+  const gasValue = 350;
 
+  // Data fictícia
+  const emissionDate = new Date().toLocaleDateString();
 
   return (
     <div className={styles.dashboard}>
@@ -23,6 +28,10 @@ export default function Dashboard() {
             }
             bordered={false}
           >
+            <div className={styles.cardContent}>
+              <p style={{ fontSize: '48px', color: '#1890ff' }}>{temperatureValue}°C</p>
+              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
+            </div>
           </Card>
         </Col>
         <Col span={8}>
@@ -36,7 +45,10 @@ export default function Dashboard() {
             } 
             bordered={false}
           >
-            Card content
+            <div className={styles.cardContent}>
+              <p style={{ fontSize: '48px', color: '#ff9900' }}>{humidityValue}%</p>
+              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
+            </div>
           </Card>
         </Col>
         <Col span={8}>
@@ -50,10 +62,14 @@ export default function Dashboard() {
             }  
             bordered={false}
           >
-            Card content
+            <div className={styles.cardContent}>
+              <p style={{ fontSize: '48px', color: '#52c41a' }}>{gasValue} ppm</p>
+              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
+            </div>
           </Card>
         </Col>
       </Row>
+      <TemperatureChart />
     </div>
   );
 }

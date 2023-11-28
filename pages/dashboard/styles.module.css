@@ -3,6 +3,11 @@
     width: 20rem;
     height: 30rem;
 }
+
+.cardContent {
+    text-align: center;
+}
+
 .dashboard {
     display: flex;
     justify-content: center;
