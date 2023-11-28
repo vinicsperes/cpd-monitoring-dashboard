@@ -16,7 +16,6 @@
     "@ant-design/icons": "^5.2.6",
     "@phosphor-icons/react": "^2.0.15",
     "antd": "^5.11.4",
-    "bizcharts": "^4.1.23",
     "chart.js": "^4.4.0",
     "next": "^14.0.3",
     "phosphor-icons": "^1.4.2",
