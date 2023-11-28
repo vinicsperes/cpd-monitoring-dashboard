@@ -32,7 +32,7 @@ export default function TemperatureChart() {
 
   const fetchAllStatus = async () => {
     try {
-      const url = 'http://localhost:3001/allStatus';
+      const url = 'https://cpd-monitoring-api.vercel.app/allStatus';
 
       const allStatusResponse = await fetch(url);
       const allStatusData = await allStatusResponse.json();

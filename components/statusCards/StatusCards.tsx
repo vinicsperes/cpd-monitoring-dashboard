@@ -12,8 +12,7 @@ export default function StatusCards() {
     
     const fetchLastStatus = async () => {
       try {
-        const vercelurl = 'https://cpd-monitoring-api.vercel.app/lastStatus'
-        const url = 'http://localhost:3001/lastStatus'
+        const url = 'https://cpd-monitoring-api.vercel.app/lastStatus'
     
         const lastStatusResponse = await fetch(url);
         const lastStatusData = await lastStatusResponse.json();
