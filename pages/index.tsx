@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
-import TemperatureChart from '../../components/temperatureChart/TemperatureChart';
+import TemperatureChart from '../components/temperatureChart/TemperatureChart';
 import { Table, Input, Button, Space } from 'antd';
-import StatusCards from '../../components/statusCards/StatusCards';
+import StatusCards from '../components/statusCards/StatusCards';
 
 interface StatusData {
   temperature: number;
