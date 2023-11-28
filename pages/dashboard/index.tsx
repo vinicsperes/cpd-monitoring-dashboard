@@ -1,75 +1,104 @@
-import React from 'react';
-import { Card, Col, Row } from 'antd';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
+import TemperatureChart from '../../components/temperatureChart/TemperatureChart';
+import { Table, Input, Button, Space } from 'antd';
+import StatusCards from '../../components/statusCards/StatusCards';
 
-import { Thermometer, Drop, Wind } from "@phosphor-icons/react";
-import TemperatureChart from '../../components/TemperatureChart';
+interface StatusData {
+  temperature: number;
+  humidity: number;
+  mq2: number;
+  timestamp: string;
+  // Add other properties as needed
+}
 
-export default function Dashboard() {
-  // Valores fictícios para temperatura, umidade e gás
-  const temperatureValue = 25;
-  const humidityValue = 60;
-  const gasValue = 350;
+const Dashboard = () => {
+  const [statusData, setStatusData] = useState<StatusData[]>([]);
+  const [filteredInfo, setFilteredInfo] = useState<Record<string, string[] | null>>({});
+  const [sortedInfo, setSortedInfo] = useState<{ columnKey?: string; order?: string }>({});
 
-  // Data fictícia
-  const emissionDate = new Date().toLocaleDateString();
+  const fetchAllStatus = async () => {
+    try {
+      const url = 'http://localhost:3001/allStatus';
+
+      const allStatusResponse = await fetch(url);
+      const allStatusData = await allStatusResponse.json();
+
+      console.log(allStatusResponse);
+      console.log(allStatusData);
+
+      setStatusData(allStatusData);
+    } catch (error) {
+      console.error('Error fetching allStatus:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllStatus();
+
+    const intervalId = setInterval(() => {
+      fetchAllStatus();
+    }, 10000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const columns = [
+    {
+      title: 'Temperature',
+      dataIndex: 'temperature',
+      key: 'temperature',
+      sorter: (a, b) => a.temperature - b.temperature,
+      sortOrder: sortedInfo.columnKey === 'temperature' && sortedInfo.order,
+    },
+    {
+      title: 'Humidity',
+      dataIndex: 'humidity',
+      key: 'humidity',
+      sorter: (a, b) => a.humidity - b.humidity,
+      sortOrder: sortedInfo.columnKey === 'humidity' && sortedInfo.order,
+    },
+    {
+      title: 'MQ-2',
+      dataIndex: 'mq2',
+      key: 'mq2',
+      sorter: (a, b) => a.mq2 - b.mq2,
+      sortOrder: sortedInfo.columnKey === 'mq2' && sortedInfo.order,
+    },
+    {
+      title: 'Data',
+      dataIndex: 'timestamp',
+      key: 'timestamp',
+      sorter: (a, b) => a.timestamp.localeCompare(b.timestamp),
+      sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
+    },
+  ] as any;
+  
+  const handleTableChange = (pagination, filters, sorter) => {
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+  
 
   return (
     <div className={styles.dashboard}>
-      <Row gutter={16}>
-        <Col span={8}>
-          <Card 
-            className={styles.card} 
-            title={
-              <div className={styles.cardTitle}>
-                <p>Temperatura</p>
-                <Thermometer size={28} />
-              </div>
-            }
-            bordered={false}
-          >
-            <div className={styles.cardContent}>
-              <p style={{ fontSize: '48px', color: '#1890ff' }}>{temperatureValue}°C</p>
-              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
-            </div>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card 
-            className={styles.card} 
-            title={
-              <div className={styles.cardTitle}>
-                <p>Umidade</p>
-                <Drop size={28} />
-              </div>
-            } 
-            bordered={false}
-          >
-            <div className={styles.cardContent}>
-              <p style={{ fontSize: '48px', color: '#ff9900' }}>{humidityValue}%</p>
-              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
-            </div>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card 
-            className={styles.card} 
-            title={
-              <div className={styles.cardTitle}>
-                <p>MQ-2</p>
-                <Wind size={28} />
-              </div>
-            }  
-            bordered={false}
-          >
-            <div className={styles.cardContent}>
-              <p style={{ fontSize: '48px', color: '#52c41a' }}>{gasValue} ppm</p>
-              <p style={{ fontSize: '14px', color: '#666' }}>Data de emissão: {emissionDate}</p>
-            </div>
-          </Card>
-        </Col>
-      </Row>
-      <TemperatureChart />
+      <div className={styles.dashboardContent}>
+        <div className={styles.statusCardsWrapper}>
+          <StatusCards />
+        </div>
+        <div className={styles.chartWrapper}>
+          <TemperatureChart />
+        </div>
+        <div className={styles.tableWrapper}>
+          <Table
+            dataSource={statusData}
+            columns={columns}
+            onChange={handleTableChange}
+          />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Dashboard;

@@ -1,23 +1,32 @@
-.card {
-    margin-top: 10rem;
-    width: 20rem;
-    height: 30rem;
-}
-
-.cardContent {
-    text-align: center;
-}
-
 .dashboard {
     display: flex;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: aliceblue;
+    margin: 1rem;
+    border-radius: 10px;
+    background-color: #e9e9e9;
 } 
 
-.cardTitle {
+.dashboardContent {
+    width: 80%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 2rem;
     align-items: center;
+}
+
+.chartWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.statusCardsWrapper {
+    margin-top: 2rem;
+}
+
+.tableWrapper {
+    width: 100%;
 }
