@@ -1,0 +1,24 @@
+.card {
+    border-radius: 10px;
+    min-width: 300px;
+}
+
+.cardContent {
+    text-align: center;
+}
+
+.statusCards{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    width: 100%;
+}
+
+.cardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
