@@ -12,7 +12,7 @@ interface StatusData {
   // Add other properties as needed
 }
 
-const Dashboard = () => {
+export default function Dashboard() {
   const [statusData, setStatusData] = useState<StatusData[]>([]);
   const [filteredInfo, setFilteredInfo] = useState<Record<string, string[] | null>>({});
   const [sortedInfo, setSortedInfo] = useState<{ columnKey?: string; order?: string }>({});
@@ -100,5 +100,3 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
