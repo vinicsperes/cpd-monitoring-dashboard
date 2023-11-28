@@ -21,9 +21,9 @@ const Dashboard = () => {
     try {
       const url = 'https://cpd-monitoring-api.vercel.app/allStatus';
 
-      const allStatusResponse = await fetch(url);
+      const allStatusResponse = await fetch(url, { mode: 'no-cors' });
       const allStatusData = await allStatusResponse.json();
-
+      
       console.log(allStatusResponse);
       console.log(allStatusData);
 

@@ -14,7 +14,7 @@ export default function StatusCards() {
       try {
         const url = 'https://cpd-monitoring-api.vercel.app/lastStatus'
     
-        const lastStatusResponse = await fetch(url);
+        const lastStatusResponse = await fetch(url, { mode: 'no-cors' });
         const lastStatusData = await lastStatusResponse.json();
     
         console.log(lastStatusResponse)

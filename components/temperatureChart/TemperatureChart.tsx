@@ -34,7 +34,7 @@ export default function TemperatureChart() {
     try {
       const url = 'https://cpd-monitoring-api.vercel.app/allStatus';
 
-      const allStatusResponse = await fetch(url);
+      const allStatusResponse = await fetch(url, { mode: 'no-cors' });
       const allStatusData = await allStatusResponse.json();
 
       const labels = allStatusData.map((data) => data.timestamp);
