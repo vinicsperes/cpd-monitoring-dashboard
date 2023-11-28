@@ -7,10 +7,7 @@ import { Thermometer, Drop, Wind } from "@phosphor-icons/react";
 
 
 export default function Dashboard() {
-  const chartData = {
-    labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-    values: [12, 19, 3, 5, 2],
-  };
+
 
   return (
     <div className={styles.dashboard}>
@@ -26,7 +23,6 @@ export default function Dashboard() {
             }
             bordered={false}
           >
-            <ChartComponent data={chartData} />
           </Card>
         </Col>
         <Col span={8}>
